@@ -4,7 +4,7 @@
 
 ## 📋 Descrição
 
-Primeiro mini projeto (via terminal) para fixar conceitos aprendidos durante minha jornada para aprender Python:
+Primeiro mini projeto (via terminal) aplicando conceitos vistos durante minha jornada para aprender Python:
 
     1. Lógica de programação
     2. POO 
