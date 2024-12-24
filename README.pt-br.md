@@ -4,7 +4,7 @@
 
 ## 📋 Descrição
 
-Primeiro mini projeto (via terminal) para fixar conceitos aprendidos dururante minha jornada para aprender Python:
+Primeiro mini projeto (via terminal) para fixar conceitos aprendidos durante minha jornada para aprender Python:
 
     1. Lógica de programação
     2. POO 
@@ -13,7 +13,7 @@ Primeiro mini projeto (via terminal) para fixar conceitos aprendidos dururante m
 
 ----
 
-## 🌟 Funcionalidades (Pendente alteração durante desenvolvimento)
+## 🌟 Funcionalidades (Ideia inicial - Pendente alteração durante desenvolvimento)
 
 📦 Gestão de Estoque: Cadastro e controle de produtos
 
