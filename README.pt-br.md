@@ -13,12 +13,12 @@ Primeiro mini projeto (via terminal) para fixar conceitos aprendidos durante min
 
 ----
 
-## 🌟 Funcionalidades (Ideia inicial - Pendente alteração durante desenvolvimento)
+## 🌟 Funcionalidades (Ideia inicial - Pode sofrer alterações durante desenvolvimento)
 
-📦 Gestão de Estoque: Cadastro e controle de produtos
+📦 Gestão de Estoque: Cadastro e controle de produtos.
 
 🛍️ Gestão de Vendas: Registro de vendas, inclusão de produtos ao carrinho de compras, cálculo de valores.
 
-📑 Gestão de Compras: Cadastro de fornecedores.
+📑 Gestão de Compras: Cadastro e controle de fornecedores, lançamento de notas fiscais de entrada.
 
 💰 Gestão Financeira: Registro de entradas e saídas, relatórios financeiros.
