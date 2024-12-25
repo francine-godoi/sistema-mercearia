@@ -1,24 +1,24 @@
-# 🛒 Grocery Store System
-[![en](https://img.shields.io/badge/lang-en-red.svg)](README.md)
-[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](README.pt-br.md)
+# 🛒 Sistema de Gerenciamento de Mercearia
+[![en](https://img.shields.io/badge/lang-en-red.svg)](README.en.md)
+[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](README.md)
 
-## 📋 Description
+## 📋 Descrição
 
-First mini project (via command line) applying concepts learned during my journey to learn Python:
+Primeiro mini projeto (via terminal) aplicando conceitos vistos durante minha jornada para aprender Python:
 
-    1. Programming logic
+    1. Lógica de programação
     2. POO 
     3. MVC
-    4. File handling
+    4. Manipulação de arquivos
 
 ----
 
-## 🌟 Features (Initial idea - May change during development)
+## 🌟 Funcionalidades (Ideia inicial - Pode sofrer alterações durante desenvolvimento)
 
-📦 Stock Management: Product registration and control.
+📦 Gestão de Estoque: Cadastro e controle de produtos.
 
-🛍️ Sales Management: Recording sales, adding products to the shopping cart, calculating values.
+🛍️ Gestão de Vendas: Registro de vendas, inclusão de produtos ao carrinho de compras, cálculo de valores.
 
-📑 Purchasing Management: Registration and control of suppliers, adding new invoices.
+📑 Gestão de Compras: Cadastro e controle de fornecedores, lançamento de notas fiscais de entrada.
 
-💰 Financial Management: Recording purchases and sales, financial reports.
+💰 Gestão Financeira: Registro de entradas e saídas, relatórios financeiros.
