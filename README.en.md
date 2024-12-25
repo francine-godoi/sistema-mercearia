@@ -22,3 +22,12 @@ First mini project (via terminal) applying concepts seen during my journey to le
 📑 Purchasing Management: Registration and control of suppliers, adding new invoices.
 
 💰 Financial Management: Recording purchases and sales, financial reports.
+
+----
+
+## ⚒️ TODO / FIX
+- [ ] Add shopping cart class
+- [ ] Add persistence in BD (.txt ou .csv)
+- [ ] Remake start menu - Separate services by categories
+- [ ] Error handling (datatype error/black info, etc)
+- [ ] Add tests

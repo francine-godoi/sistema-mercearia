@@ -1,7 +1,9 @@
 class Produto:
 
+    _produtos = []
+
     def __init__(self) -> None:
-        self.produtos = []
+        self.produtos = self._produtos
 
 
     def cadastro_produto(self, nome: str, preco: float) -> None:

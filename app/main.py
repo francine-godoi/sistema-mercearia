@@ -1,6 +1,6 @@
-from controllers.controller import Controller
+from controllers.controller_menus import ControllerMenus
 
 if __name__ == "__main__":
-   controller = Controller() 
+   controller = ControllerMenus() 
    controller.main()
 
