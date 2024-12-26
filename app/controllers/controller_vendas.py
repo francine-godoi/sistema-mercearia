@@ -16,35 +16,57 @@ class ControllerVendas:
         """ Cadastra as informações da venda
             :raise: ValueError: Código ou quantidade inválida
             :raise: IndexError: Código do produto inválido
+            :raise: StopIteration: Código do produto não encontrado.
         """
         produtos = self.model_produto.lista_produtos()        
         carrinho = []
         adicionar_mais_produtos = 's'
 
-        #FIXME: erro ao selecionar código de produto inválido, parando app
-        #TODO: caso tente adicionar o mesmo produto no carrinho, soma a quantidade ao invés de adicionar novamente
         while adicionar_mais_produtos == 's':
+            codigo_produto, quantidade, adicionar_mais_produtos = self.view_vendas.tela_vendas(produtos)
+
+            if codigo_produto == "" or quantidade == "":
+                print("Informações em branco. Por favor verifique e tente novamente")
+                return
+            
             try:
-                codigo_produto, quantidade, adicionar_mais_produtos = self.view_vendas.tela_vendas(produtos)
-                item_comprado = self.model_produto.listar_produto_por_codigo(int(codigo_produto))                
-                pedido = self.montar_pedido(item_comprado, quantidade)           
-                carrinho.append(pedido)
-                total = self.calcular_total(carrinho)
-                self.view_vendas.mostrar_carrinho(carrinho, total)
+                codigo_produto = int(codigo_produto)
+                quantidade = int(quantidade)
             except ValueError:
                 print("Código ou quantidade inválidos. Por favor verifique e tente novamente.")
-            except IndexError:
+                return
+
+            try:
+                item_comprado = self.model_produto.listar_produto_por_codigo(codigo_produto)
+            except StopIteration:
                 print("Código do produto não encontrado. Consulte a lista de produtos.\n")
+                return            
+
+            qtde_no_carrinho = 0
+            if carrinho: # Caso já tenha o mesmo item no carrinho, soma suas quantidades
+                qtde_no_carrinho = sum([item["quantidade"] for item in carrinho if item["nome"] == item_comprado["nome"]])
+                try:  # remove item para evitar duplicidade            
+                    item_duplicado = [item for item in carrinho if item["nome"] == item_comprado["nome"]]                
+                    carrinho.remove(item_duplicado[0]) 
+                except IndexError: # não achou duplicados
+                    pass
+                else:
+                    print("Produto já se encontra no carrinho. Sua quantidade será atualizada!")
+
+            pedido = self.montar_pedido(item_comprado, (quantidade + qtde_no_carrinho))
+            carrinho.append(pedido)
+            total = self.calcular_total(carrinho)
+            self.view_vendas.mostrar_carrinho(carrinho, total)
         
-        if carrinho:
+        if carrinho: # se montou um carrinho com sucesso, salva a venda
            data = datetime.now().strftime("%d/%m/%Y %H:%M")
            self.model_venda.cadastrar_venda(data, carrinho, total)
 
-
-    def montar_pedido(self, item_comprado: dict, quantidade: int) -> dict:
+    @staticmethod
+    def montar_pedido(item_comprado: dict, quantidade: int) -> dict:
         """ Monta o pedido para adicionar ao carrinho de compras
-            :param item: lista com as informações do produto adicionado ao carrinho
-            :param type: list
+            :param item_comprado: dicionario com as informações do produto adicionado ao carrinho
+            :param type: dict
 
             :param quantidade: quantidade do produto
             :param type: int
@@ -52,39 +74,18 @@ class ControllerVendas:
             :return: dicionário com as informações da venda
             :rtype: dict
         """ 
-        nome, valor = item_comprado["nome"], item_comprado["preco"]        
+        nome, valor = item_comprado["nome"], item_comprado["preco"]
 
-        subtotal = self.calcular_subtotal(quantidade, valor)
+        subtotal = int(quantidade) * float(valor)
         pedido = {"nome": nome,
                   "quantidade": quantidade,
                   "valor": valor,
                   "subtotal": subtotal}
         return pedido
 
-    @classmethod
-    def calcular_subtotal(cls, quantidade: int, valor: float) -> float:
-        """ Retorna o subtotal de uma compra
-            :param quantidade: quantidade comprada
-            :param type: int
-
-            :param valor: valor do produto
-            :param type: float
-
-            :return: subtotal da compra de um produto
-            :rtype: float
-        """
-        return int(quantidade) * float(valor)    
-
-    @classmethod
-    def calcular_total(cls, carrinho: list) -> float:
-        """ Calcula o valor total da compra
-         
-            :param carrinho: todos os item comprados
-            :param type: list
-
-            :return: soma de totos os subtotais
-            :rtype: float     
-        """
+    @staticmethod
+    def calcular_total(carrinho: list) -> float:
+        """ Calcula o valor total da compra"""
         return sum(item["subtotal"] for item in carrinho)
 
 

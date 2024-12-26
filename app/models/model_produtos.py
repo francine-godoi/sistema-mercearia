@@ -33,12 +33,11 @@ class Produto:
             :return: Dicionário com um produto
             :rtype: dict
         """       
-        
         return next(produto for produto in self.produtos if produto["codigo"] == codigo)       
         
     
-    @classmethod
-    def get_codigo(cls, produtos: list) -> int: 
+    @staticmethod
+    def get_codigo(produtos: list) -> int: 
         """ Pega a quantidade de produtos na lista para determinar o código do próximo
             :param produtos:  todos os produtos cadastrados
             :param type: list

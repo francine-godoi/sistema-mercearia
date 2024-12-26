@@ -17,13 +17,15 @@ class ControllerProdutos:
 
             :raise: ValueError: Valor inválido
         """     
-        #TODO: não permitir cadastro de produto sem nome
+        if nome == "":
+            print("Nome do produto não pode ficar em branco")
+            return
         try:
-            preco = float(preco.replace(',','.'))
-            self.model_produto.cadastro_produto(nome, preco)
+            preco = float(preco.replace(',','.'))                
         except ValueError:
             print("Valor inválido. Dica: Não coloque pontos para separar os milhares.")
         else:
+            self.model_produto.cadastro_produto(nome, preco)
             print("Cadastrado com sucesso! \n")            
 
 

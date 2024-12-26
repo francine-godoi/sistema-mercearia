@@ -1,5 +1,3 @@
-import os
-
 class ViewProdutos:
   
     def tela_cadastro_produto(self) -> list:
@@ -7,7 +5,6 @@ class ViewProdutos:
                 :return: nome e preço do produto
                 :rtype: list
             """
-            os.system("cls||clear")
             print("--------- Cadastrar Novo Produto ---------")
             nome = input("Produto: ")
             preco = input("Preço: ")

@@ -1,5 +1,3 @@
-import os
-
 class ViewMenus:
 
     def mostrar_menu(self) -> None:
