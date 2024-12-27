@@ -1,9 +1,13 @@
-class Produto:
+from utils.auxiliar_db import AuxiliarDB
 
-    _produtos = []
+class Produto(AuxiliarDB):
+
+    #_produtos = []
+    DB_NAME = "produtos"
 
     def __init__(self) -> None:
-        self.produtos = self._produtos
+    #    self.produtos = self._produtos
+        self.db_name = self.DB_NAME
 
 
     def cadastro_produto(self, nome: str, preco: float) -> None:
@@ -14,17 +18,23 @@ class Produto:
             :param preco: preço do produto
             :param type: float
         """
-        codigo = self.get_codigo(self.produtos)
-        self.produtos.append({"codigo": codigo + 1,
-                              "nome": nome,
-                              "preco": preco})
+        # codigo = self.get_codigo(self.produtos)
+        # self.produtos.append({"codigo": codigo + 1,
+        #                       "nome": nome,
+        #                       "preco": preco})
+
+        status = "Ativo"
+        codigo = self.get_codigo(self.pegar_dados_db(self.DB_NAME))
+        dados = [codigo, nome, preco, status]
+        self.salvar_na_db(self.DB_NAME, dados)
 
 
     def lista_produtos(self) -> list:
         """ Retorna uma lista com todos os produtos """
-        return self.produtos
+        #return self.produtos
+        return self.pegar_dados_db(self.DB_NAME)
  
-    
+    #TODO resolver como fica essa função usando DB
     def listar_produto_por_codigo(self, codigo: int) -> dict: 
         """ Retorna um dicionario com um produto filtrado pelo código
             :param codigo: código do produto
@@ -32,8 +42,11 @@ class Produto:
 
             :return: Dicionário com um produto
             :rtype: dict
-        """       
-        return next(produto for produto in self.produtos if produto["codigo"] == codigo)       
+        """            
+        #return next(produto for produto in self.produtos if produto["codigo"] == codigo)
+        produtos = self.lista_produtos()
+                
+        return        
         
     
     @staticmethod
