@@ -3,11 +3,11 @@ from utils.auxiliar_db import AuxiliarDB
 class Produto(AuxiliarDB):
 
     #_produtos = []
-    DB_NAME = "produtos"
+    NOME_BD = "produtos"
 
     def __init__(self) -> None:
     #    self.produtos = self._produtos
-        self.db_name = self.DB_NAME
+        self.nome_bd = self.NOME_BD
 
 
     def cadastro_produto(self, nome: str, preco: float) -> None:
@@ -23,16 +23,15 @@ class Produto(AuxiliarDB):
         #                       "nome": nome,
         #                       "preco": preco})
 
-        status = "Ativo"
-        codigo = self.get_codigo(self.pegar_dados_db(self.DB_NAME))
-        dados = [codigo, nome, preco, status]
-        self.salvar_na_db(self.DB_NAME, dados)
+        codigo = self.get_codigo(self.lista_produtos())
+        dados = [codigo, nome, preco]
+        self.salvar_na_db(self.NOME_BD, dados)
 
 
     def lista_produtos(self) -> list:
         """ Retorna uma lista com todos os produtos """
         #return self.produtos
-        return self.pegar_dados_db(self.DB_NAME)
+        return self.pegar_todos_dados_db(self.NOME_BD)
  
     #TODO resolver como fica essa função usando DB
     def listar_produto_por_codigo(self, codigo: int) -> dict: 
@@ -44,9 +43,7 @@ class Produto(AuxiliarDB):
             :rtype: dict
         """            
         #return next(produto for produto in self.produtos if produto["codigo"] == codigo)
-        produtos = self.lista_produtos()
-                
-        return        
+        return self.pegar_dados_por_codigo(self.NOME_BD, codigo)              
         
     
     @staticmethod
@@ -57,6 +54,6 @@ class Produto(AuxiliarDB):
 
             :return: quantidade de produtos armazenados
             :rtype: int
-        """  
-        return sum(1 for item in produtos)
+        """          
+        return sum(1 for item in produtos) + 1
     

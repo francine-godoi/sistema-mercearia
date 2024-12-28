@@ -1,7 +1,10 @@
-codigo:1,produto:maracuja,preco: 5.0
-codigo:2,produto:manga,preco: 2.5
-codigo:3,produto:uva,preco: 1.5
-codigo:1,produto:maracuja,preco:5.0
-codigo:2,produto:manga,preco:2.5
-codigo:3,produto:uva,preco:1.5
-6,a,1.0,Ativo
+1,maracujá,5.0
+2,manga,2.5
+3,uva,1.5
+4,pera,3.0
+5,goiaba,5.5
+6,melancia,10.5
+7,abacaxi,8.0
+8,banana,2.0
+9,graviola,10.0
+10,chocolate,12.5

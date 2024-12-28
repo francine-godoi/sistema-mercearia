@@ -36,7 +36,7 @@ class ControllerVendas:
                 print("Código ou quantidade inválidos. Por favor verifique e tente novamente.")
                 return
 
-            try:
+            try:                
                 item_comprado = self.model_produto.listar_produto_por_codigo(codigo_produto)
             except StopIteration:
                 print("Código do produto não encontrado. Consulte a lista de produtos.\n")
@@ -74,7 +74,8 @@ class ControllerVendas:
             :return: dicionário com as informações da venda
             :rtype: dict
         """ 
-        nome, valor = item_comprado["nome"], item_comprado["preco"]
+        # item_comprado = ['código', 'nome', 'valor']
+        nome, valor = item_comprado[1], item_comprado[2]
 
         subtotal = int(quantidade) * float(valor)
         pedido = {"nome": nome,

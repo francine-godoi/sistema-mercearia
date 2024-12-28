@@ -22,7 +22,8 @@ class ViewProdutos:
         print("-------------------------------------")
                 
         for produto in produtos:
-            item = f'{produto["codigo"]} - {produto["nome"]} - R$ {float(produto["preco"]):.2f}'
+            # 0 = código | 1 = nome produto | 2 = preço
+            item = f'{produto[0]} - {produto[1]} - R$ {float(produto[2]):.2f}'
             print(item.replace(".",","))
 
         print("\n")
