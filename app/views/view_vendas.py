@@ -36,7 +36,7 @@ class ViewVendas:
         print("\n--------------- Seu Carrinho ---------------")
 
         for item in carrinho:
-            descricao = f'Produto: {item["nome"]} - Qtde: {item["quantidade"]} - Valor UN - R${float(item["valor"]):.2f} - Sub-Total: R${float(item["subtotal"]):.2f}'
+            descricao = f'Produto: {item["produto"]} - Qtde: {item["quantidade"]} - Valor UN - R${float(item["valor"]):.2f} - Sub-Total: R${float(item["subtotal"]):.2f}'
             print(descricao.replace(".",","))
             
         print("-----------------------------------------------")
@@ -49,16 +49,19 @@ class ViewVendas:
             :param vendas: lista com todas as vendas
             :param type: list
         """      
-
+        
+        #TODO: arrumar um  jeito de pegar os dados do banco para mostrar aqui
         print("\n--Relatório de Vendas--")
         print("---------------------------------------------------------------")
-        for num_pedido, venda in enumerate(vendas):
-            print(f"\nPedido nº{num_pedido + 1} - Data do pedido: {venda["data"]}")
+        for venda in vendas:
+            print(f"\nPedido nº{venda[0]} - Data do pedido: {venda[1]}")
             print("---------------------------------------------------------------")
-
-            for item in venda["pedido"]:
-                descricao = f'Produto: {item["nome"]} - Qtde: {item["quantidade"]} - Valor UN - R${float(item["valor"]):.2f} - Sub-Total: R${float(item["subtotal"]):.2f}'
-                print(descricao.replace(".",","))
+            a = str(venda[2]).strip("[]")
+            
+           # for item in venda[2]:
+            #    print(item)
+               # descricao = f'Produto: {item["produto"]} - Qtde: {item["quantidade"]} - Valor UN - R${float(item["valor"]):.2f} - Sub-Total: R${float(item["subtotal"]):.2f}'
+               # print(descricao.replace(".",","))
             
             print("---------------------------------------------------------------")   
             print(f'Total do Pedido: R${venda["total"]:.2f}\n')

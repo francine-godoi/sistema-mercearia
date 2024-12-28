@@ -1,0 +1,4 @@
+1,28/12/2024 10:23,"[{'codigo': '11', 'produto': 'bombom', 'quantidade': 1, 'valor': '22.0', 'subtotal': 22.0}, {'codigo': '10', 'produto': 'chocolate', 'quantidade': 5, 'valor': '12.5', 'subtotal': 62.5}]",84.5
+2,28/12/2024 10:39,"['codigo:1, produto:maracujá, quantidade:1, valor:5.0,subtotal:5.0']",0
+3,28/12/2024 10:47,"[('1', 'maracujá', 1, '5.0', 5.0), ('2', 'manga', 2, '2.5', 5.0)]",0
+4,28/12/2024 10:52,"[{'codigo': '1', 'produto': 'maracujá', 'quantidade': 1, 'valor': '5.0', 'subtotal': 5.0}, {'codigo': '2', 'produto': 'manga', 'quantidade': 2, 'valor': '2.5', 'subtotal': 5.0}]",10.0

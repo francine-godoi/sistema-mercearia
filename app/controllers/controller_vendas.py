@@ -41,12 +41,15 @@ class ControllerVendas:
             except StopIteration:
                 print("Código do produto não encontrado. Consulte a lista de produtos.\n")
                 return            
-
+            
             qtde_no_carrinho = 0
             if carrinho: # Caso já tenha o mesmo item no carrinho, soma suas quantidades
-                qtde_no_carrinho = sum([item["quantidade"] for item in carrinho if item["nome"] == item_comprado["nome"]])
+                
+                # item_comprado = ['código', 'nome', 'valor']                
+
+                qtde_no_carrinho = sum([item["quantidade"] for item in carrinho if item["produto"] == item_comprado[1]])
                 try:  # remove item para evitar duplicidade            
-                    item_duplicado = [item for item in carrinho if item["nome"] == item_comprado["nome"]]                
+                    item_duplicado = [item for item in carrinho if item["produto"] == item_comprado[1]]                
                     carrinho.remove(item_duplicado[0]) 
                 except IndexError: # não achou duplicados
                     pass
@@ -64,21 +67,13 @@ class ControllerVendas:
 
     @staticmethod
     def montar_pedido(item_comprado: dict, quantidade: int) -> dict:
-        """ Monta o pedido para adicionar ao carrinho de compras
-            :param item_comprado: dicionario com as informações do produto adicionado ao carrinho
-            :param type: dict
-
-            :param quantidade: quantidade do produto
-            :param type: int
-
-            :return: dicionário com as informações da venda
-            :rtype: dict
-        """ 
-        # item_comprado = ['código', 'nome', 'valor']
-        nome, valor = item_comprado[1], item_comprado[2]
+        """ Monta o pedido para adicionar ao carrinho de compras""" 
+        
+        codigo, nome, valor = item_comprado
 
         subtotal = int(quantidade) * float(valor)
-        pedido = {"nome": nome,
+        pedido = {"codigo": codigo,
+                  "produto": nome,
                   "quantidade": quantidade,
                   "valor": valor,
                   "subtotal": subtotal}
