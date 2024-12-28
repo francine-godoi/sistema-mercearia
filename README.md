@@ -25,8 +25,9 @@ Primeiro mini projeto (via terminal) aplicando conceitos vistos durante minha jo
 
 ----
 ## ⚒️ TODO / FIX
-- [ ] Adicionar uma classe para o carrinho de compras
-- [ ] Adicionar persistência BD (.txt ou .csv)
+- [x] Adicionar uma classe para o carrinho de compras
+- [x] Adicionar persistência BD (.txt ou .csv)
 - [ ] Refazer menu inicial - Separar serviços por categorias
-- [ ] Tratamento de erros (tipo de dados/informação em branco, etc)
+- [x] Tratamento de erros (tipo de dados/informação em branco, etc)
 - [ ] Adicionar testes
+- [ ] Criar relatórios com filtro (ex: por data)

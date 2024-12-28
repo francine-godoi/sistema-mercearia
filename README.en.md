@@ -26,8 +26,9 @@ First mini project (via terminal) applying concepts seen during my journey to le
 ----
 
 ## ⚒️ TODO / FIX
-- [ ] Add shopping cart class
-- [ ] Add persistence in BD (.txt ou .csv)
+- [x] Add shopping cart class
+- [x] Add persistence in BD (.txt ou .csv)
 - [ ] Remake start menu - Separate services by categories
-- [ ] Error handling (datatype error/black info, etc)
+- [x] Error handling (datatype error/black info, etc)
 - [ ] Add tests
+- [ ] Create filtered reports (ex: by dates)

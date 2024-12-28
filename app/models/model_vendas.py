@@ -5,21 +5,21 @@ class Venda(AuxiliarDB):
     
     NOME_BD = "vendas"
 
-    def __init__(self) -> None:    
-        self.nome_bd = self.NOME_BD
-
-
-    def cadastrar_venda(self, data: datetime, carrinho: list, total: float) -> None:
+    def cadastrar_venda(self, data: datetime, total: float) -> None:
         """ Armazena uma venda no 'bd'           
 
-        Como ficará armazenado na lista:
-        ['dd/mm/yyyy HH:MM', [{'nome': 'nome_produto', 'quantidade': int, 'valor': float, 'subtotal': float}],'total']              
+        Como ficará armazenado:
+        id_venda, 'dd/mm/yyyy HH:MM', 'total'              
         """ 
-        self.salvar_na_db(self.nome_bd, [data, carrinho, total])
-        #self.vendas.append({"data": data, "pedido":carrinho, "total":total}) 
-  
+        self.salvar_na_db(self.NOME_BD, [data, total])
+ 
 
     def listar_vendas(self) -> list:
         """ Retorna uma lista com todas as vendas """
-        return self.pegar_todos_dados_db(self.nome_bd)
+        return self.pegar_todos_dados_db(self.NOME_BD)
         
+
+    def pegar_ultimo_id(self) -> int:
+        dados = self.listar_vendas()
+        return sum(1 for x in dados)
+    

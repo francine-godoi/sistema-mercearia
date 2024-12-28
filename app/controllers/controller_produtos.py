@@ -9,14 +9,10 @@ class ControllerProdutos:
 
     def cadastrar_produto(self, nome: str, preco: str) -> None:
         """ Cadastra um produto no 'bd'
-            :param nome: nome do produto
-            :param type: string
-
-            :param preco: preço do produto
-            :param type: string
-
             :raise: ValueError: Valor inválido
         """     
+        # Inicio validação de dados
+
         if nome == "" or preco == "":
             print("Valores em branco. Verifique e tente novamente.\n")
             return
@@ -25,9 +21,14 @@ class ControllerProdutos:
         except ValueError:
             print("Valor inválido. Dica: Não coloque pontos para separar os milhares.")
             return
-        else:
-            self.model_produto.cadastro_produto(nome, preco)
-            print("Cadastrado com sucesso! \n")            
+        
+        if preco <= 0:
+            print("Valor inválido. Não pode ser menor ou igual a zero")
+            return
+        
+        # Se tudo ok, cadastra produto
+        self.model_produto.cadastro_produto(nome, preco)
+        print("Cadastrado com sucesso! \n")            
 
 
     def listar_produtos(self) -> None:

@@ -4,12 +4,11 @@ class Produto(AuxiliarDB):
     
     NOME_BD = "produtos"
 
-    def __init__(self) -> None:    
-        self.nome_bd = self.NOME_BD
-
-
     def cadastro_produto(self, nome: str, preco: float) -> None:
-        """ Realiza o armazenamento dos dados dos produtos em DB (.csv) """       
+        """ Realiza o armazenamento dos dados dos produtos em DB (.csv)
+                Como ficará armazenado:
+                'id_produto', 'nome', 'preco_unit' 
+        """       
         self.salvar_na_db(self.NOME_BD, [nome, preco])
 
 
@@ -19,7 +18,7 @@ class Produto(AuxiliarDB):
  
     
     def listar_produto_por_codigo(self, codigo: int) -> list: 
-        """ Retorna uma lista com dados do produto filtrado pelo código(int) """        
+        """ Retorna uma lista com dados do produto filtrado pelo código(int) """                
         return self.pegar_dados_por_codigo(self.NOME_BD, codigo)              
         
     
