@@ -1,16 +1,15 @@
 from models.model_produtos import Produto
 from models.model_vendas import Venda
-from models.model_produtos_vendidos import ProdutosVendidos
+from models.model_carrinho import Carrinho
 from views.view_vendas import ViewVendas
-
-from datetime import datetime
 
 class ControllerVendas:
 
     def __init__(self) -> None:        
-        self.model_produto = Produto()                
-        self.view_vendas = ViewVendas()   
-        self.carrinho = ProdutosVendidos()            
+        self.produto = Produto()
+        self.venda = Venda()                
+        self.tela_vendas = ViewVendas()           
+        self.carrinho = Carrinho()            
         
 
     def cadastrar_venda(self) -> None:
@@ -19,11 +18,11 @@ class ControllerVendas:
             :raise: IndexError: Código do produto inválido
             :raise: StopIteration: Código do produto não encontrado.
         """        
-        lista_produtos = self.model_produto.lista_produtos()        
+        lista_produtos = self.produto.lista_produtos()        
         adicionar_mais_produtos = 's'
 
         while adicionar_mais_produtos == 's':
-            codigo_produto, quantidade, adicionar_mais_produtos = self.view_vendas.tela_vendas(lista_produtos)
+            codigo_produto, quantidade, adicionar_mais_produtos = self.tela_vendas.cadastrar_nova_venda(lista_produtos)
 
             # Inicio Validação de dados
 
@@ -43,13 +42,12 @@ class ControllerVendas:
                 return
 
             try:                
-                item_comprado = self.model_produto.listar_produto_por_codigo(codigo_produto)
+                item_comprado = self.produto.listar_produto_por_codigo(codigo_produto)
             except StopIteration:
                 print("Código do produto não encontrado. Consulte a lista de produtos.\n")
                 return            
             
             # Fim Validação de dados
-
 
             # Começo processo de vendas
 
@@ -62,17 +60,14 @@ class ControllerVendas:
                         qtde_no_carrinho = item["quantidade"] # pega a quantidade
                         self.carrinho.remover_item(item) # remove item para evitar duplicidade  
                         print("Produto já se encontra no carrinho. Sua quantidade será atualizada!")
+                        break
 
             self.carrinho.adicionar_item(item_comprado, (quantidade + qtde_no_carrinho))            
             total_venda = self.calcular_total()
-            self.view_vendas.mostrar_carrinho(self.carrinho.listar_itens(), total_venda)
+            self.tela_vendas.mostrar_carrinho(self.carrinho.listar_itens(), total_venda)
         
         if self.carrinho: # se montou um carrinho com sucesso, salva a venda           
-           data = datetime.now().strftime("%d/%m/%Y %H:%M")  
-           venda = Venda()                   
-           id_venda = venda.cadastrar_venda(data, total_venda)
-           
-           self.carrinho.salvar_carrinho(id_venda)
+           self.venda.finalizar_venda(self.carrinho, total_venda)
            self.carrinho.limpar_carrinho()
            
     
@@ -83,6 +78,6 @@ class ControllerVendas:
 
     def relatorio_vendas(self) -> None:
         """ Gera um relatório com todas as vendas realizadas """
-        vendas = Venda().listar_vendas()
-        produtos_vendidos = ProdutosVendidos().listar_produtos_vendidos()
-        self.view_vendas.gerar_relatorio_vendas(vendas, produtos_vendidos)
+        vendas = self.venda.listar_vendas()
+        produtos_vendidos = self.venda.listar_produtos_vendidos()
+        self.tela_vendas.gerar_relatorio_vendas(vendas, produtos_vendidos)

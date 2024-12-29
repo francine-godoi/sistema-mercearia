@@ -4,7 +4,7 @@ import os
 project_root = os.path.dirname(os.path.dirname(__file__))
 caminho = os.path.join(project_root, 'db')
 
-class AuxiliarDB:    
+class DbBase:    
     
     def salvar_na_db(self, nome_bd: str, dados: list, criar_id: bool = True) -> None:
         if criar_id:
@@ -22,12 +22,13 @@ class AuxiliarDB:
                 dados.append(linha)
         return dados
     
+    
     @staticmethod
     def pegar_dados_por_codigo(nome_bd: str, codigo: int) -> list:         
         with open(f"{caminho}/{nome_bd}.csv", encoding="utf-8") as csvfile:
             return next((linha for linha in csv.reader(csvfile) if linha[0] == str(codigo)))
 
-    
+
     def gerar_id(self, nome_bd: str) -> int:        
         # pega a proxima id caso já exista dados cadastrados, senão retorna id 1        
         if os.path.isfile(f"{caminho}/{nome_bd}.csv"):
@@ -35,17 +36,6 @@ class AuxiliarDB:
             return sum(1 for x in dados) + 1
         return 1
 
-
-if __name__ == "__main__":
-    aux = AuxiliarDB()
-    dados = aux.pegar_todos_dados_db("vendas")
-   # for dado in dados:
-   #     print(str(dado[2]).split(","))
-    #print(sum(1 for x in dados))
-    #print(aux.pegar_dados_por_codigo("vendas", 1))
-
-    lista = [{'nome': 'nome_produto', 'quantidade': 1, 'valor': 1.1, 'subtotal': 1.0}, {'nome': 'nome_produto', 'quantidade': 1, 'valor': 1.1, 'subtotal': 1.0}]            
-    aux.salvar_na_db_aux("carrinho", 1, lista)
 
 
 

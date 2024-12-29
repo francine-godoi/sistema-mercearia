@@ -1,6 +1,6 @@
-from utils.auxiliar_db import AuxiliarDB
+from models.model_db_base import DbBase
 
-class Produto(AuxiliarDB):
+class Produto(DbBase):
     
     NOME_BD = "produtos"
 

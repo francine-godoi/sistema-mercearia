@@ -5,7 +5,7 @@ class ViewVendas:
     def __init__(self):
          self.view_produtos = ViewProdutos()
   
-    def tela_vendas(self, produtos: list) -> list:
+    def cadastrar_nova_venda(self, produtos: list) -> list:
             """ Mostra a tela de vendas
                 :param produtos: lista com todos os produtos
                 :param type: list
