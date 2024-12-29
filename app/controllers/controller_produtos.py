@@ -26,7 +26,8 @@ class ControllerProdutos:
             print("Valor inválido. Não pode ser menor ou igual a zero")
             return
         
-        # Se tudo ok, cadastra produto
+        # Fim validação Dados
+        
         self.model_produto.cadastro_produto(nome, preco)
         print("Cadastrado com sucesso! \n")            
 
