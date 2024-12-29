@@ -8,9 +8,11 @@ class Carrinho(AuxiliarDB):
         """ Armazena o carrinho no 'bd' vinculado a venda          
 
         Como ficará armazenado:
-        'codigo_produto', 'nome_produto', 'quantidade', 'valor_unit', 'subtotal', 'id_venda'           
+        'codigo_produto', 'nome_produto', 'quantidade', 'valor_unit', 'subtotal', 'id_venda'                 
         """                
-        self.salvar_na_tabela_aux(self.NOME_BD, id_venda, carrinho)        
+        for item in carrinho:
+            item["fk_id"] = id_venda
+            self.salvar_na_db(self.NOME_BD, item.values(), criar_id=False)        
   
 
     def listar_carrinho(self, cod_venda) -> list:

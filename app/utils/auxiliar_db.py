@@ -6,17 +6,13 @@ caminho = os.path.join(project_root, 'db')
 
 class AuxiliarDB:    
     
-    def salvar_na_db(self, nome_bd: str, dados: list) -> None:
-        dados.insert(0, self.gerar_id(nome_bd))
+    def salvar_na_db(self, nome_bd: str, dados: list, criar_id: bool = True) -> None:
+        if criar_id:
+            dados.insert(0, self.gerar_id(nome_bd))
+
         with open(f"{caminho}/{nome_bd}.csv", "a", newline="", encoding="utf-8") as csvfile:
             csv.writer(csvfile).writerow(dados) 
 
-    def salvar_na_tabela_aux(self, nome_bd: str, fk_id: int, dados: list) -> None:        
-        with open(f"{caminho}/{nome_bd}.csv", "a", newline="", encoding="utf-8") as csvfile:
-            escrever = csv.writer(csvfile) 
-            for dado in dados:
-                dado["fk_id"] = fk_id
-                escrever.writerow(dado.values())
         
     @staticmethod
     def pegar_todos_dados_db(nome_bd: str) -> list: 

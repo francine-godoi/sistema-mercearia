@@ -20,14 +20,14 @@ class ControllerVendas:
             :raise: IndexError: Código do produto inválido
             :raise: StopIteration: Código do produto não encontrado.
         """
-        produtos = self.model_produto.lista_produtos()        
+        lista_produtos = self.model_produto.lista_produtos()        
         carrinho = []
         adicionar_mais_produtos = 's'
 
         while adicionar_mais_produtos == 's':
-            codigo_produto, quantidade, adicionar_mais_produtos = self.view_vendas.tela_vendas(produtos)
+            codigo_produto, quantidade, adicionar_mais_produtos = self.view_vendas.tela_vendas(lista_produtos)
 
-            # Inicio de válidação de dados
+            # Inicio de validação de dados
             if codigo_produto == "" or quantidade == "":
                 print("Informações em branco. Por favor verifique e tente novamente")
                 return
