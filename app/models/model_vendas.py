@@ -12,6 +12,7 @@ class Venda(AuxiliarDB):
         id_venda, 'dd/mm/yyyy HH:MM', 'total'              
         """ 
         self.salvar_na_db(self.NOME_BD, [data, total])
+        return self.pegar_ultimo_id()
  
 
     def listar_vendas(self) -> list:
