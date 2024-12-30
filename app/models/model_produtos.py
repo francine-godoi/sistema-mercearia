@@ -4,21 +4,22 @@ class Produto(DbBase):
     
     NOME_BD = "produtos"
 
-    def cadastro_produto(self, nome: str, preco: float) -> None:
+    @classmethod
+    def cadastrar_produto(cls, nome: str, preco: float) -> None:
         """ Realiza o armazenamento dos dados dos produtos em DB (.csv)
                 Como ficará armazenado:
                 'id_produto', 'nome', 'preco_unit' 
         """       
-        self.salvar_na_db(self.NOME_BD, [nome, preco])
+        cls.salvar_na_db(cls.NOME_BD, [nome, preco])
 
-
-    def lista_produtos(self) -> list:
+    @classmethod
+    def listar_produtos(cls) -> list:
         """ Retorna uma lista com todos os produtos """        
-        return self.pegar_todos_dados_db(self.NOME_BD)
+        return cls.pegar_todos_dados_db(cls.NOME_BD)
  
-    
-    def listar_produto_por_codigo(self, codigo: int) -> list: 
+    @classmethod
+    def listar_produto_por_codigo(cls, codigo: int) -> list: 
         """ Retorna uma lista com dados do produto filtrado pelo código(int) """                
-        return self.pegar_dados_por_codigo(self.NOME_BD, codigo)              
+        return cls.pegar_dados_por_codigo_db(cls.NOME_BD, codigo)              
         
     

@@ -1,6 +1,6 @@
 class ViewProdutos:
   
-    def tela_cadastro_produto(self) -> list:
+    def exibir_form_cadastro_produto(self) -> list:
             """ Mostra a tela de cadastro de um novo produto
                 :return: nome e preço do produto
                 :rtype: list
@@ -11,7 +11,7 @@ class ViewProdutos:
             return [nome, preco]
     
 
-    def visualizar_produtos(self, produtos: list) -> None:
+    def exibir_lista_produtos(self, produtos: list) -> None:
         """ Mostra uma lista com todos os produtos
             :param produtos: lista com todos os produtos
             :param type: list 

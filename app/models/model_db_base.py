@@ -6,16 +6,17 @@ caminho = os.path.join(project_root, 'db')
 
 class DbBase:    
     
-    def salvar_na_db(self, nome_bd: str, dados: list, criar_id: bool = True) -> None:
+    @classmethod
+    def salvar_na_db(cls, nome_bd: str, dados: list, criar_id: bool = True) -> None:
         if criar_id:
-            dados.insert(0, self.gerar_id(nome_bd))
+            dados.insert(0, cls.gerar_id(nome_bd))
 
         with open(f"{caminho}/{nome_bd}.csv", "a", newline="", encoding="utf-8") as csvfile:
             csv.writer(csvfile).writerow(dados) 
 
         
-    @staticmethod
-    def pegar_todos_dados_db(nome_bd: str) -> list: 
+    @classmethod
+    def pegar_todos_dados_db(cls, nome_bd: str) -> list: 
         dados = []
         with open(f"{caminho}/{nome_bd}.csv", encoding="utf-8") as csvfile:
             for linha in csv.reader(csvfile):
@@ -23,16 +24,16 @@ class DbBase:
         return dados
     
     
-    @staticmethod
-    def pegar_dados_por_codigo(nome_bd: str, codigo: int) -> list:         
+    @classmethod
+    def pegar_dados_por_codigo_db(cls, nome_bd: str, codigo: int) -> list:         
         with open(f"{caminho}/{nome_bd}.csv", encoding="utf-8") as csvfile:
             return next((linha for linha in csv.reader(csvfile) if linha[0] == str(codigo)))
 
-
-    def gerar_id(self, nome_bd: str) -> int:        
+    @classmethod
+    def gerar_id(cls, nome_bd: str) -> int:        
         # pega a proxima id caso já exista dados cadastrados, senão retorna id 1        
         if os.path.isfile(f"{caminho}/{nome_bd}.csv"):
-            dados = self.pegar_todos_dados_db(nome_bd)
+            dados = cls.pegar_todos_dados_db(nome_bd)
             return sum(1 for x in dados) + 1
         return 1
 

@@ -4,35 +4,46 @@ from models.model_produtos import Produto
 class ControllerProdutos:
 
     def __init__(self) -> None:        
-        self.model_produto = Produto()
-        self.view_produtos = ViewProdutos()
+        self.produto = Produto()
+        self.tela_produtos = ViewProdutos()
 
-    def cadastrar_produto(self, nome: str, preco: str) -> None:
+    def cadastrar_produto(self) -> None:
         """ Cadastra um produto no 'bd'
             :raise: ValueError: Valor inválido
         """     
-        # Inicio validação de dados
+        nome, preco = self.tela_produtos.exibir_form_cadastro_produto()
 
-        if nome == "" or preco == "":
-            print("Valores em branco. Verifique e tente novamente.\n")
-            return
+        # Inicio validação de dados
+        if nome == "":
+            print("Nome do produto não pode ser em branco.\n")
+            return self.cadastrar_produto()
+        
+        if not self.preco_valido(preco):
+            return self.cadastrar_produto()    
+        # Fim validação Dados
+
+        preco = float(preco.replace(',','.'))
+        self.produto.cadastrar_produto(nome, preco)
+        print("Cadastrado com sucesso! \n")            
+
+    def preco_valido(self, preco):
+        if preco == "":
+            print("Preço não pode ficar em branco.\n")
+            return False
+        
         try:
             preco = float(preco.replace(',','.'))                
         except ValueError:
-            print("Valor inválido. Dica: Não coloque pontos para separar os milhares.")
-            return
+            print("Preço deve ser em números.\n")
+            return False
         
         if preco <= 0:
-            print("Valor inválido. Não pode ser menor ou igual a zero")
-            return
-        
-        # Fim validação Dados
-        
-        self.model_produto.cadastro_produto(nome, preco)
-        print("Cadastrado com sucesso! \n")            
+            print("Valor deve ser maior que zero.\n")
+            return False  
 
-
+        return True
+        
     def listar_produtos(self) -> None:
         """ Lista todos os produtos """
-        produtos = self.model_produto.lista_produtos()
-        self.view_produtos.visualizar_produtos(produtos)
+        produtos = self.produto.listar_produtos()
+        self.tela_produtos.exibir_lista_produtos(produtos)

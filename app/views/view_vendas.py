@@ -3,9 +3,9 @@ from views.view_produtos import ViewProdutos
 class ViewVendas:
 
     def __init__(self):
-         self.view_produtos = ViewProdutos()
+         self.tela_produtos = ViewProdutos()
   
-    def cadastrar_nova_venda(self, produtos: list) -> list:
+    def exibir_form_cadastro_venda(self, produtos: list) -> list:
             """ Mostra a tela de vendas
                 :param produtos: lista com todos os produtos
                 :param type: list
@@ -15,7 +15,7 @@ class ViewVendas:
             """
             print("--------------- Vendas ---------------\n")
                         
-            self.view_produtos.visualizar_produtos(produtos)
+            self.tela_produtos.exibir_lista_produtos(produtos)
             codigo = input("Código do produto que deseja comprar: ")
 
             # produtos = 'id_produto', 'nome', 'preco_unit'
@@ -33,7 +33,7 @@ class ViewVendas:
             return [codigo, quantidade, continuar]
     
 
-    def mostrar_carrinho(self, carrinho: list, total: float) -> None:
+    def exibir_itens_carrinho(self, carrinho: list, total: float) -> None:
         """ Mostra o carrinho de compras """
 
         print("\n--------------- Seu Carrinho ---------------")
@@ -47,7 +47,7 @@ class ViewVendas:
         print("\n")
 
 
-    def gerar_relatorio_vendas(self, vendas: list, carrinho: list) -> None:  
+    def exibir_relatorio_vendas(self, vendas: list, carrinho: list) -> None:  
         """ Mostra o relatório de todas as vendas realizadas
             :param vendas: lista com todas as vendas
             :param type: list
