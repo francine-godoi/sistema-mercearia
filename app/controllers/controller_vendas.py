@@ -44,10 +44,11 @@ class ControllerVendas:
         if self.carrinho: # se montou um carrinho com sucesso, salva a venda           
            self.venda.finalizar_venda(self.carrinho, total_venda)
            self.carrinho.limpar_carrinho()
-           print("Vendas finalizada com sucesso!\n\n")
-           
-    def quantidade_item_duplicado(self, item_comprado):
-        # Se existe um carrinho, verifica se já tenha o mesmo item e soma suas quantidades          
+           print(f"Vendas finalizada com sucesso! Pedido nº {self.venda.pegar_ultimo_id()}\n\n")
+
+
+    def quantidade_item_duplicado(self, item_comprado) -> int:
+        """ Se existe um carrinho, verifica se já tenha o mesmo item e soma suas quantidades """
         qtde_no_carrinho = 0            
         if self.carrinho:
             # item_comprado = ['código', 'nome', 'preco_unit']                
@@ -59,12 +60,16 @@ class ControllerVendas:
                     break        
         return qtde_no_carrinho
     
+
     def calcular_total(self) -> float:
         """ Calcula o valor total da compra"""
+
         return sum(item["subtotal"] for item in self.carrinho.listar_itens())
 
-    def codigo_valido(self, codigo_produto) -> int:
-        
+
+    def codigo_valido(self, codigo_produto) -> bool:
+        """ Validação de código """
+
         if codigo_produto == "":
             print("Código não pode ficar em branco.\n")
             return False
@@ -84,7 +89,9 @@ class ControllerVendas:
         return True
 
     
-    def quantidade_valida(self, quantidade) -> int:
+    def quantidade_valida(self, quantidade) -> bool:
+        """ Validação de quantidade """
+
         if quantidade == "":
             print("Quantidade não pode ficar em branco.\n")
             return False
@@ -101,9 +108,28 @@ class ControllerVendas:
 
         return True
 
+    def consultar_venda_codigo(self, codigo_venda) -> None:
+        """ Exibe as informações de uma Venda especifica """
+        vendas = self.venda.listar_vendas_codigo(codigo_venda)
+        produtos_vendidos = self.venda.listar_produtos_por_venda(codigo_venda)
+        self.tela_vendas.exibir_venda(vendas, produtos_vendidos)
+
 
     def relatorio_vendas(self) -> None:
         """ Gera um relatório com todas as vendas realizadas """
         vendas = self.venda.listar_vendas()
+        produtos_vendidos = self.venda.listar_produtos_vendidos()
+        self.tela_vendas.exibir_relatorio_vendas(vendas, produtos_vendidos)
+
+
+    def relatorio_venda_data(self, data_inicial, data_final) -> None:
+        """ Gera um relatório com as vendas filtradas por data """
+        # id_venda, 'dd/mm/yyyy HH:MM', 'total' 
+        vendas = []
+        for item in self.venda.listar_vendas():
+            data = item[1].split(" ") 
+            if data_inicial <= data[0] <= data_final:
+                vendas.append(item)
+
         produtos_vendidos = self.venda.listar_produtos_vendidos()
         self.tela_vendas.exibir_relatorio_vendas(vendas, produtos_vendidos)

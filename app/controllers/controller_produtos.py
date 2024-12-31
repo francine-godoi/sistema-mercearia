@@ -26,7 +26,8 @@ class ControllerProdutos:
         self.produto.cadastrar_produto(nome, preco)
         print("Cadastrado com sucesso! \n")            
 
-    def preco_valido(self, preco):
+    def preco_valido(self, preco) -> bool:
+        """ Validação dos preços """
         if preco == "":
             print("Preço não pode ficar em branco.\n")
             return False

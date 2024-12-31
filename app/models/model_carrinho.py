@@ -23,7 +23,8 @@ class Carrinho():
         """ Retorna uma lista com todos os produtos """        
         return self.carrinho    
 
-    def limpar_carrinho(self):
+    def limpar_carrinho(self) -> None:
+            """ Limpa as informações do carrinho """
             self.carrinho = []      
 
       

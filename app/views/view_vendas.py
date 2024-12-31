@@ -6,13 +6,8 @@ class ViewVendas:
          self.tela_produtos = ViewProdutos()
   
     def exibir_form_cadastro_venda(self, produtos: list) -> list:
-            """ Mostra a tela de vendas
-                :param produtos: lista com todos os produtos
-                :param type: list
+            """ Mostra a tela de vendas """
 
-                :return: código e quantidade do produto vendido e uma flag (str: 's' ou 'n') avisando se o cliente deseja adicionar novo produto ao carrinho de compras
-                :rtype: list
-            """
             print("--------------- Vendas ---------------\n")
                         
             self.tela_produtos.exibir_lista_produtos(produtos)
@@ -48,13 +43,8 @@ class ViewVendas:
 
 
     def exibir_relatorio_vendas(self, vendas: list, carrinho: list) -> None:  
-        """ Mostra o relatório de todas as vendas realizadas
-            :param vendas: lista com todas as vendas
-            :param type: list
+        """ Mostra o relatório de todas as vendas realizadas"""      
 
-            :param carrinho: lista com todas os carrinhos
-            :param type: list
-        """      
         print("\n---------------------------Relatório de Vendas---------------------------")
         
         # 'id_venda', 'data/hora', 'total'
@@ -74,3 +64,23 @@ class ViewVendas:
         
         print(f"\nTotal das vendas: R$ {sum([float(venda[2]) for venda in vendas]):.2f}\n")
         print("-------------------------------------------------------------------------\n\n")            
+
+
+    def exibir_venda(self, vendas: list, carrinho: list) -> None: 
+        """ Mostra os dados de uma venda consultada por código """    
+
+        print("\n---------------------------Consulta Vendas------------------------------")
+        
+        # 'id_venda', 'data/hora', 'total'
+        print(f"\nPedido nº{vendas[0]} - Data do pedido: {vendas[1]}")
+        print("-------------------------------------------------------------------------")
+            
+        # 'codigo_produto', 'nome_produto', 'quantidade', 'valor_unit', 'subtotal', 'id_venda'
+        for item in carrinho:
+            descricao = f'Produto: {item[1]} - Qtde: {item[2]} - Valor UN - R${float(item[3]):.2f} - Sub-Total: R${float(item[4]):.2f}'
+            print(descricao.replace(".",","))
+        
+        print("-------------------------------------------------------------------------")   
+        print(f'Total do Pedido: R${float(vendas[2]):.2f}\n')
+        print("-------------------------------------------------------------------------\n")           
+ 

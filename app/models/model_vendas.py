@@ -30,21 +30,26 @@ class Venda(DbBase):
     def listar_vendas(cls) -> list:
         """ Retorna uma lista com todas as vendas """
         return cls.pegar_todos_dados_db(cls.DB_VENDAS)    
+    
+    @classmethod
+    def listar_vendas_codigo(cls, codigo_venda) -> list:
+        """ Retorna uma lista com todas as vendas """
+        return cls.pegar_dados_por_codigo_db(cls.DB_VENDAS, codigo_venda)    
 
+    @classmethod
+    def listar_produtos_vendidos(cls) -> list:
+        """ Retorna uma lista com todos os produtos vendidos """
+        return cls.pegar_todos_dados_db(cls.DB_PRODUTOS_VENDIDOS)       
+    
     @classmethod
     def listar_produtos_por_venda(cls, id_venda) -> list:
         """ Retorna uma lista com todos os produtos de uma venda """
         produtos_da_venda = []        
         for item in cls.listar_produtos_vendidos():
             #'codigo_produto', 'nome_produto', 'quantidade', 'valor_unit', 'subtotal', 'id_venda'   
-            if int(item[5]) == id_venda:
+            if item[5] == id_venda:
                 produtos_da_venda.append(item)
         return produtos_da_venda
-    
-    @classmethod
-    def listar_produtos_vendidos(cls) -> list:
-        """ Retorna uma lista com todas os produtos vendidos """
-        return cls.pegar_todos_dados_db(cls.DB_PRODUTOS_VENDIDOS)       
 
     @classmethod
     def pegar_ultimo_id(cls) -> int:

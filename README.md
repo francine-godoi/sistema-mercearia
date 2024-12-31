@@ -1,6 +1,4 @@
 # 🛒 Sistema de Gerenciamento de Mercearia
-[![en](https://img.shields.io/badge/lang-en-red.svg)](README.en.md)
-[![pt-br](https://img.shields.io/badge/lang-pt--br-green.svg)](README.md)
 
 ## 📋 Descrição
 
@@ -9,25 +7,15 @@ Primeiro mini projeto (via terminal) aplicando conceitos vistos durante minha jo
     1. Lógica de programação
     2. POO 
     3. MVC
-    4. Manipulação de arquivos
+    4. Manipulação de arquivos (.csv)
 
 ----
 
-## 💡 Funcionalidades (Ideia inicial - Pode sofrer alterações durante desenvolvimento)
+## 💡 Funcionalidades
 
-📦 Gestão de Estoque: Cadastro e controle de produtos.
+📦 Cadastro de produtos.
 
-🛍️ Gestão de Vendas: Registro de vendas, inclusão de produtos ao carrinho de compras, cálculo de valores.
+🛍️ Registro de vendas, inclusão de produtos ao carrinho de compras, cálculo de valores.
 
-📑 Gestão de Compras: Cadastro e controle de fornecedores, lançamento de notas fiscais de entrada.
+💰 Relatórios / Consultas.
 
-💰 Gestão Financeira: Registro de entradas e saídas, relatórios financeiros.
-
-----
-## ⚒️ TODO / FIX
-- [x] Adicionar uma classe para o carrinho de compras
-- [x] Adicionar persistência BD (.txt ou .csv)
-- [ ] Refazer menu inicial - Separar serviços por categorias
-- [x] Tratamento de erros (tipo de dados/informação em branco, etc)
-- [ ] Adicionar testes
-- [ ] Criar relatórios com filtro (ex: por data)
