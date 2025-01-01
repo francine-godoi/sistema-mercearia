@@ -42,12 +42,12 @@ class Venda(DbBase):
         return cls.pegar_todos_dados_db(cls.DB_PRODUTOS_VENDIDOS)       
     
     @classmethod
-    def listar_produtos_por_venda(cls, id_venda) -> list:
+    def listar_produtos_por_venda(cls, id_venda: int) -> list:
         """ Retorna uma lista com todos os produtos de uma venda """
         produtos_da_venda = []        
         for item in cls.listar_produtos_vendidos():
             #'codigo_produto', 'nome_produto', 'quantidade', 'valor_unit', 'subtotal', 'id_venda'   
-            if item[5] == id_venda:
+            if item[5] == str(id_venda):
                 produtos_da_venda.append(item)
         return produtos_da_venda
 

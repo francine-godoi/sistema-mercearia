@@ -3,6 +3,8 @@ from models.model_vendas import Venda
 from models.model_carrinho import Carrinho
 from views.view_vendas import ViewVendas
 
+from datetime import datetime
+
 class ControllerVendas:
 
     def __init__(self) -> None:        
@@ -108,28 +110,57 @@ class ControllerVendas:
 
         return True
 
-    def consultar_venda_codigo(self, codigo_venda) -> None:
-        """ Exibe as informações de uma Venda especifica """
-        vendas = self.venda.listar_vendas_codigo(codigo_venda)
-        produtos_vendidos = self.venda.listar_produtos_por_venda(codigo_venda)
-        self.tela_vendas.exibir_venda(vendas, produtos_vendidos)
-
 
     def relatorio_vendas(self) -> None:
-        """ Gera um relatório com todas as vendas realizadas """
+        """ Gera um relatório com todas as vendas realizadas """        
         vendas = self.venda.listar_vendas()
         produtos_vendidos = self.venda.listar_produtos_vendidos()
         self.tela_vendas.exibir_relatorio_vendas(vendas, produtos_vendidos)
 
 
-    def relatorio_venda_data(self, data_inicial, data_final) -> None:
+    def relatorio_venda_data(self) -> None:
         """ Gera um relatório com as vendas filtradas por data """
+        data_inicial = input("Data Inicial: dd/mm/aaaa: ")
+        data_final = input("Data Inicial: dd/mm/aaaa: ")
+
+        try:
+            data_inicial = datetime.strptime(data_inicial, "%d/%m/%Y")
+            data_final = datetime.strptime(data_final, "%d/%m/%Y")
+        except ValueError:
+            print("Data no formato errado. Tente novamente.\n")
+            return self.relatorio_venda_data()
+
         # id_venda, 'dd/mm/yyyy HH:MM', 'total' 
         vendas = []
         for item in self.venda.listar_vendas():
-            data = item[1].split(" ") 
-            if data_inicial <= data[0] <= data_final:
+            data_venda = item[1].split(" ")
+            data_venda = datetime.strptime(data_venda[0], "%d/%m/%Y") 
+            if data_inicial <= data_venda <= data_final:
                 vendas.append(item)
 
         produtos_vendidos = self.venda.listar_produtos_vendidos()
         self.tela_vendas.exibir_relatorio_vendas(vendas, produtos_vendidos)
+
+
+    def consultar_venda_codigo(self) -> None:
+        """ Exibe as informações de uma Venda especifica """
+
+        codigo_venda = input("Número do pedido: ")
+        if codigo_venda == "":
+            print("Código não pode ficar em branco.\n")
+            return self.consultar_venda_codigo()
+        
+        try:
+            codigo_venda = int(codigo_venda)
+        except ValueError:
+            print("Código deve ser um número.\n")
+            return self.consultar_venda_codigo()
+        
+        try:
+            vendas = self.venda.listar_vendas_codigo(codigo_venda)
+        except StopIteration:
+            print(f"Pedido nº {codigo_venda} não encontrado.\n")
+            return
+        
+        produtos_vendidos = self.venda.listar_produtos_por_venda(codigo_venda)
+        self.tela_vendas.exibir_venda(vendas, produtos_vendidos)

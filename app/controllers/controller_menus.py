@@ -49,16 +49,13 @@ class ControllerMenus:
             case '2.1':
                 self.controller_vendas.cadastrar_venda()
             case '2.2':
-                codigo_venda = input("Número do pedido: ")
-                self.controller_vendas.consultar_venda_codigo(codigo_venda)
+                self.controller_vendas.consultar_venda_codigo()
             case '2.3':
                 return self.mostrar_menu_principal()
             case '3.1':
                 self.controller_vendas.relatorio_vendas()
             case '3.2':
-                data_inicial = input("Data Inicial: dd/mm/aaaa: ")
-                data_final = input("Data Inicial: dd/mm/aaaa: ")
-                self.controller_vendas.relatorio_venda_data(data_inicial, data_final)
+                self.controller_vendas.relatorio_venda_data()
             case '3.3':
                 return self.mostrar_menu_principal()
             case _:
