@@ -120,12 +120,13 @@ class ControllerVendas:
 
     def relatorio_venda_data(self) -> None:
         """ Gera um relatório com as vendas filtradas por data """
+        formato_data = "%d/%m/%Y"
         data_inicial = input("Data Inicial: dd/mm/aaaa: ")
         data_final = input("Data Inicial: dd/mm/aaaa: ")
 
         try:
-            data_inicial = datetime.strptime(data_inicial, "%d/%m/%Y")
-            data_final = datetime.strptime(data_final, "%d/%m/%Y")
+            data_inicial = datetime.strptime(data_inicial, formato_data)
+            data_final = datetime.strptime(data_final, formato_data)
         except ValueError:
             print("Data no formato errado. Tente novamente.\n")
             return self.relatorio_venda_data()
@@ -134,7 +135,7 @@ class ControllerVendas:
         vendas = []
         for item in self.venda.listar_vendas():
             data_venda = item[1].split(" ")
-            data_venda = datetime.strptime(data_venda[0], "%d/%m/%Y") 
+            data_venda = datetime.strptime(data_venda[0], formato_data) 
             if data_inicial <= data_venda <= data_final:
                 vendas.append(item)
 
